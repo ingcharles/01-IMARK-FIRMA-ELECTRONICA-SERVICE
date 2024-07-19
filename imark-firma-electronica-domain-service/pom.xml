@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>ec.imark</groupId>
+    <artifactId>imark-firma-electronica-service</artifactId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>imark-firma-electronica-domain-service</artifactId>
+  <packaging>pom</packaging>
+  <name>imark-firma-electronica-domain-service</name>
+  <url>http://maven.apache.org</url>
+  <modules>
+    <module>imark-firma-electronica-domain-application-service</module>
+    <module>imark-firma-electronica-domain-core-service</module>
+  </modules>
+</project>
