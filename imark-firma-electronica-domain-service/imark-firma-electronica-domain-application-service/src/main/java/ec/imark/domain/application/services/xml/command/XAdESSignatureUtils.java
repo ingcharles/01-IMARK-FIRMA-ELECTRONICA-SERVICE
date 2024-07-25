@@ -16,7 +16,6 @@ import eu.europa.esig.dss.model.ToBeSigned;
 import eu.europa.esig.dss.model.x509.CertificateToken;
 import eu.europa.esig.dss.spi.validation.CommonCertificateVerifier;
 import eu.europa.esig.dss.token.DSSPrivateKeyEntry;
-//import eu.europa.esig.dss.validation.CommonCertificateVerifier;
 import eu.europa.esig.dss.xades.XAdESSignatureParameters;
 import eu.europa.esig.dss.xades.signature.XAdESService;
 import eu.europa.esig.dss.token.Pkcs12SignatureToken;
@@ -26,7 +25,6 @@ import java.io.Serializable;
 import java.security.KeyStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * -- AQUI AÑADIR LA DESCRIPCION DE LA CLASE --.
@@ -54,7 +52,7 @@ public class XAdESSignatureUtils implements Serializable {
       if (!xmlFile.exists() || !xmlFile.isFile()) {
         throw new IOException("El archivo XML en la ruta especificada no existe: "+xmlPath);
       }
-      DSSDocument document = new FileDocument(xmlFile);
+      DSSDocument toSignDocument = new FileDocument(xmlFile);
 
       // Crear el token PKCS12 con la protección de contraseña
       KeyStore.PasswordProtection passwordProtection = new KeyStore.PasswordProtection(p12Password.toCharArray());
@@ -82,14 +80,14 @@ public class XAdESSignatureUtils implements Serializable {
         service = new XAdESService(new CommonCertificateVerifier());
 
         // Obtener los datos a firmar
-        ToBeSigned dataToSign = service.getDataToSign(document, parameters);
+        ToBeSigned dataToSign = service.getDataToSign(toSignDocument, parameters);
 
         // Calcular el valor de la firma
         signatureValue = signingToken.sign(dataToSign, DigestAlgorithm.SHA256, privateKey);
       }
 
       // Firmar el documento
-      DSSDocument signedDocument = service.signDocument(document, parameters, signatureValue);
+      DSSDocument signedDocument = service.signDocument(toSignDocument, parameters, signatureValue);
       // Guardar el documento firmado
       signedDocument.save("C:\\respaldo\\firmaElectronica\\signed_document.xml");
       return signedDocument;

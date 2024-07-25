@@ -12,8 +12,6 @@ import ec.imark.record.request.XmlRequestRecord;
 import ec.imark.record.response.XmlResponseRecord;
 import eu.europa.esig.dss.model.DSSDocument;
 import lombok.RequiredArgsConstructor;
-import org.apache.xml.security.Init;
-import org.apache.xml.security.signature.XMLSignatureInput;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,10 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class XmlCommandServiceImpl implements XmlCommandService {
-  static {
-    // Inicializa la biblioteca de seguridad XML
-    Init.init();
-  }
+
   private final XmlCommandRepository xmlCommandRepository;
   private final XAdESSignatureUtils xAdESSignatureUtils;
   private final XMLSchemaValidator xMLSchemaValidator;
@@ -49,10 +44,11 @@ public class XmlCommandServiceImpl implements XmlCommandService {
     String xmlPath = "C:\\respaldo\\firmaElectronica\\archivo.xml";
     // Ruta del archivo .p12
     String p12Path = "C:\\respaldo\\firmaElectronica\\firma.p12";
-    // Path to your XSD files
-    String xsdFilePath = "C:\\respaldo\\firmaElectronica\\factura_V2.0.0.xsd";
     // Contraseña del archivo .p12
     String p12Password = "Edu3751997";
+    // Path to your XSD files
+    String xsdFilePath = "C:\\respaldo\\firmaElectronica\\factura_V2.0.0.xsd";
+
 
 
 
