@@ -14,7 +14,9 @@ import ec.imark.domain.application.ports.inputs.pdf.command.PdfCommandService;
 import ec.imark.record.request.PdfRequestRecord;
 import ec.imark.record.response.PdfResponseRecord;
 import eu.europa.esig.dss.enumerations.DigestAlgorithm;
+import eu.europa.esig.dss.enumerations.SignatureLevel;
 import eu.europa.esig.dss.enumerations.SignaturePackaging;
+import eu.europa.esig.dss.model.*;
 import eu.europa.esig.dss.model.DSSDocument;
 import eu.europa.esig.dss.model.FileDocument;
 import eu.europa.esig.dss.model.SignatureValue;
@@ -32,13 +34,13 @@ import java.io.IOException;
 import java.security.KeyStore;
 import javax.imageio.ImageIO;
 import lombok.RequiredArgsConstructor;
-import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import eu.europa.esig.dss.model.DSSException;
 
 /**
  * -- AQUI AÑADIR LA DESCRIPCION DE LA CLASE --.
@@ -92,9 +94,12 @@ public class PdfCommandServiceImpl implements PdfCommandService {
         CertificateToken[] certificateChain = privateKey.getCertificateChain();
 
         PAdESSignatureParameters parameters = new PAdESSignatureParameters();
+        parameters.setSignatureLevel(SignatureLevel.PAdES_BASELINE_B);
         parameters.setSigningCertificate(signingCertificate);
         parameters.setCertificateChain(certificateChain);
         parameters.setSignaturePackaging(SignaturePackaging.ENVELOPED);
+        parameters.setReason("a");
+        parameters.setLocation("b");
 
         // Coordenadas de la firma y la imagen QR
         float x = 100;
@@ -102,7 +107,7 @@ public class PdfCommandServiceImpl implements PdfCommandService {
         int pageNumber = 1; // Cambiar según la página donde quieras firmar
 
         // Crear el documento PDF
-        try (PDDocument document = Loader.loadPDF(pdfFile)) {
+        try (PDDocument document = PDDocument.load(pdfFile)) {
           PDPage page = document.getPage(pageNumber - 1);
 
           // Añadir la imagen QR
@@ -129,7 +134,7 @@ public class PdfCommandServiceImpl implements PdfCommandService {
           ToBeSigned dataToSign = service.getDataToSign(toSignDocumentQr, parameters);
 
           // Calcular el valor de la firma
-          signatureValue = signingToken.sign(dataToSign, DigestAlgorithm.SHA256, privateKey);
+          signatureValue = signingToken.sign(dataToSign, DigestAlgorithm.SHA512, privateKey);
         }
 
         // Firmar el documento
@@ -145,7 +150,7 @@ public class PdfCommandServiceImpl implements PdfCommandService {
         // Guardar el documento firmado
         //signedDocument.save(signedPdfFilePath);
       }
-    } catch (IOException | WriterException e) {
+    } catch (IOException | WriterException | DSSException e) {
       System.out.println("Exception: " + e.getMessage());
 
     }

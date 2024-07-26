@@ -57,12 +57,12 @@
       <artifactId>dss-token</artifactId>
       <version>6.1.RC1</version>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <groupId>eu.europa.ec.joinup.sd-dss</groupId>
       <artifactId>dss-utils-google-guava</artifactId>
       <version>6.1.RC1</version>
       <scope>test</scope>
-    </dependency>
+    </dependency>-->
     <!--FIRMAR PDF-->
     <dependency>
       <groupId>eu.europa.ec.joinup.sd-dss</groupId>
@@ -73,11 +73,6 @@
       <groupId>eu.europa.ec.joinup.sd-dss</groupId>
       <artifactId>dss-service</artifactId>
       <version>6.1.RC1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.pdfbox</groupId>
-      <artifactId>pdfbox</artifactId>
-      <version>3.0.2</version>
     </dependency>
     <dependency>
       <groupId>com.google.zxing</groupId>
@@ -105,10 +100,10 @@
       <id>central</id>
       <url>https://repo.maven.apache.org/maven2</url>
     </repository>
-    <repository>
+   <!-- <repository>
       <id>central</id>
       <url>https://repo1.maven.org/maven2/</url>
-    </repository>
+    </repository>-->
     <repository>
       <id>dss-repo</id>
       <url>https://repo.etsi.org/dss/</url>

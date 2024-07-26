@@ -7,7 +7,6 @@
 package ec.imark.domain.application.services.xml.command;
 
 import ec.imark.domain.application.ports.inputs.xml.command.XmlCommandService;
-import ec.imark.domain.application.ports.outputs.repositories.xml.command.XmlCommandRepository;
 import ec.imark.record.request.XmlRequestRecord;
 import ec.imark.record.response.XmlResponseRecord;
 import eu.europa.esig.dss.model.DSSDocument;
@@ -34,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class XmlCommandServiceImpl implements XmlCommandService {
 
-  private final XmlCommandRepository xmlCommandRepository;
+  //private final XmlCommandRepository xmlCommandRepository;
   private final XAdESSignatureUtils xAdESSignatureUtils;
   private final XMLSchemaValidator xMLSchemaValidator;
   @Override
@@ -55,7 +54,7 @@ public class XmlCommandServiceImpl implements XmlCommandService {
     DSSDocument dSSDocument =xAdESSignatureUtils.firmarDocumentoXml(xmlPath,p12Path,p12Password);
     String xmlPathSigned = "C:\\respaldo\\firmaElectronica\\signed_document.xml";
     boolean xsdVa =xMLSchemaValidator.validarDocumentoXml(xsdFilePath, xmlPathSigned);
-    return xmlCommandRepository.firmar(xmlRequestRecord);
+    return null;
   }
 
 

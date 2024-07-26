@@ -51,14 +51,6 @@
       <groupId>org.springframework.boot</groupId>
     </dependency>
     <dependency>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-      <groupId>org.springframework.cloud</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-cloud-starter-config</artifactId>
-      <groupId>org.springframework.cloud</groupId>
-    </dependency>
-    <dependency>
       <artifactId>spring-boot-starter-actuator</artifactId>
       <groupId>org.springframework.boot</groupId>
     </dependency>
