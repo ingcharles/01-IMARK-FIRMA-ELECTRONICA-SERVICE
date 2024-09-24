@@ -31,36 +31,64 @@ spring:
     ansi:
       enabled: always
   datasource:
-    url: ${VAC_DEV_URL}
-    username: ${VAC_DEV_USER}
-    password: ${VAC_DEV_PASSWD}
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:postgresql://localhost:5434/plataformadb
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    #url: ${SATJE_BADALEX_DEV_URL}
+    #username: ${SATJE_BADALEX_DEV_USER}
+    #password: ${SATJE_BADALEX_DEV_PASSWD}
+    #driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
-    database: SQL_SERVER
+    #database: SQL_SERVER
+    database: POSTGRESQL
     open-in-view: false
-    show-sql: false
+    show-sql: true
     hibernate:
-      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
     properties:
       hibernate:
         format_sql: true
-        default_schema: VAC
+        default_schema: "plataformadb"
         globally_quoted_identifiers: true
-        dialect: org.hibernate.dialect.SQLServerDialect
-      org:
-        hibernate:
-          envers:
-            store_data_at_delete: true
-            default_schema: AUD
-            audit_table_suffix: _AUD
-    defer-datasource-initialization: false
+  defer-datasource-initialization: false
   sql:
     init:
-      platform: SQLServer
+      platform: postgres
       mode: always
+  #datasource:
+    #url: ${VAC_DEV_URL}
+    #username: ${VAC_DEV_USER}
+    #password: ${VAC_DEV_PASSWD}
+    #driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver*
+    #jpa:
+    #database: SQL_SERVER
+    #open-in-view: false
+    #show-sql: false
+      #hibernate:
+      #ddl-auto: update
+        #naming:
+        #physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        #implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+      #properties:
+        #hibernate:
+        #format_sql: true
+        #default_schema: VAC
+        #globally_quoted_identifiers: true
+      #dialect: org.hibernate.dialect.SQLServerDialect
+        #org:
+        #hibernate:
+        #envers:
+        #store_data_at_delete: true
+        #default_schema: AUD
+      #audit_table_suffix: _AUD
+    #defer-datasource-initialization: false
+    #sql:
+      #init:
+      #platform: SQLServer
+      #mode: always
   hikari:
     minimumIdle: 1
     maximumPoolSize: 1

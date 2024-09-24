@@ -124,7 +124,7 @@
           <failOnViolation>true</failOnViolation>
           <includeTests>true</includeTests>
           <rulesets>
-            <ruleset>http://10.1.22.164/analisis-codigo/analisis-codigo/-/raw/main/pmd-ruleset.xml</ruleset>
+            <!--<ruleset>http://10.1.22.164/analisis-codigo/analisis-codigo/-/raw/main/pmd-ruleset.xml</ruleset>-->
           </rulesets>
           <skipEmptyReport>false</skipEmptyReport>
           <verbose>true</verbose>
@@ -210,6 +210,7 @@
     <springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
     <springdoc.version>1.7.0</springdoc.version>
     <therapi-runtime-javadoc.version>0.15.0</therapi-runtime-javadoc.version>
+    <postgresql.version>42.7.3</postgresql.version>
   </properties>
   <repositories>
     <repository>

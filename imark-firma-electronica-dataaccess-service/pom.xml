@@ -28,11 +28,11 @@
       <artifactId>spring-boot-starter-data-jpa</artifactId>
       <groupId>org.springframework.boot</groupId>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <artifactId>mssql-jdbc</artifactId>
       <groupId>com.microsoft.sqlserver</groupId>
       <version>${mssql-version}</version>
-    </dependency>
+    </dependency>-->
     <dependency>
       <artifactId>HikariCP</artifactId>
       <groupId>com.zaxxer</groupId>
@@ -44,6 +44,11 @@
     <dependency>
       <artifactId>spring-data-envers</artifactId>
       <groupId>org.springframework.data</groupId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgresql.version}</version>
     </dependency>
   </dependencies>
 </project>
